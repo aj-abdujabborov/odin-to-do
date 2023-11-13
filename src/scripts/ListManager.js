@@ -13,6 +13,10 @@ export default class ListManager {
         return this.lists.find((element) => element.name == name);
     }
 
+    getAllLists() {
+        return this.lists;
+    }
+
     getListNames() {
         return this.lists.map((element) => element.name);
     }

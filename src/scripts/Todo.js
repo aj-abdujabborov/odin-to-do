@@ -13,16 +13,12 @@ export default class Todo {
     }
 
     setTitle(title) {
-        if (title === undefined || title.length < 1) {
-            throw new Error('Task title is required');
-        }
+        if (title === undefined) return;
         this._title = title.toString();
     }
 
     setDescription(description) {
-        if (description === undefined) {
-            return;
-        }
+        if (description === undefined) return;
         this._description = description.toString();
     }
 

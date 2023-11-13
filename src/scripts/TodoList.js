@@ -2,11 +2,9 @@ import Todo from './Todo.js';
 import { isSameDay } from 'date-fns';
 
 export default class TodoList {
-    // name;
-
     constructor(name) {
         if (name === undefined || name.length < 1) return;
-        this.name =  name.toString();
+        this.name = name.toString();
         this.list = [];
     }
 
