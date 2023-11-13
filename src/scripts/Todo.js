@@ -26,7 +26,7 @@ export default class Todo {
     }
 
     setDate(date) {
-        if (!(date instanceof Date) || Date.now() > date) return;
+        if (!(date instanceof Date) || Date.now() > date.getTime()) return;
         this.#inDate = date;
     }
 
@@ -44,7 +44,7 @@ export default class Todo {
     }
 
     getDate() {
-        return this.#inDate.toDateString();
+        return this.#inDate;
     }
 
     getPriority() {

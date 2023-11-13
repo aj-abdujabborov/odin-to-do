@@ -1,6 +1,26 @@
+import Todo from './Todo.js';
+import { isSameDay } from 'date-fns';
+
 export default class TodoList {
-    constructor() {
+    // name;
+
+    constructor(name) {
+        if (name === undefined || name.length < 1) return;
+        this.name =  name.toString();
         this.list = [];
+    }
+
+    getTodo(index) {
+        return this.list[index];
+    }
+
+    getAllTodos() {
+        return this.list;
+    }
+
+    getTodayTodos() {
+        const now = new Date();
+        return this.list.filter((element) => isSameDay(element.getDate(), now));
     }
 
     addTodo(todo) {
@@ -10,8 +30,10 @@ export default class TodoList {
         this.list.push(todo);
     }
 
-    removeTodo(todo) {
-        this.list.splice(this.list.indexOf(todo), 1);
+    removeTodo(input) {
+        const todoInd = this.#getTodoIndex(input);
+
+        this.list.splice(todoInd, 1);
     }
 
     moveTodoUp(input) {
