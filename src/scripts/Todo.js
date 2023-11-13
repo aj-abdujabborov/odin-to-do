@@ -1,4 +1,5 @@
 export default class Todo {
+    #status = false;
     #inTitle;
     #inDescription = "";
     #inDate = new Date();
@@ -35,6 +36,10 @@ export default class Todo {
         this.#inPriority = priority;
     }
 
+    toggleStatus() {
+        this.#status = !this.#status;
+    }
+
     getTitle() {
         return this.#inTitle;
     }
@@ -49,5 +54,9 @@ export default class Todo {
 
     getPriority() {
         return this.#inPriority;
+    }
+
+    getStatus() {
+        return this.#status;
     }
 }
