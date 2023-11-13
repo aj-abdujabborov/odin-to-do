@@ -1,4 +1,5 @@
 import "./styles/style.scss"
+import Todo from './scripts/Todo';
+// import { DateFns } from 'date-fns';
 
-console.log('Hello! Worldddd');
-// document.querySelector("img").src = Image;
+window.Todo = Todo;
