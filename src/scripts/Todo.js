@@ -1,9 +1,9 @@
 export default class Todo {
-    #status = false;
-    #inTitle;
-    #inDescription = "";
-    #inDate = new Date();
-    #inPriority = 1;
+    _status = false;
+    _title;
+    _description = "";
+    _date = new Date();
+    _priority = 1;
 
     constructor(title, description, date, priority) {
         this.setTitle(title);
@@ -16,47 +16,47 @@ export default class Todo {
         if (title === undefined || title.length < 1) {
             throw new Error('Task title is required');
         }
-        this.#inTitle = title.toString();
+        this._title = title.toString();
     }
 
     setDescription(description) {
         if (description === undefined) {
             return;
         }
-        this.#inDescription = description.toString();
+        this._description = description.toString();
     }
 
     setDate(date) {
         if (!(date instanceof Date) || Date.now() > date.getTime()) return;
-        this.#inDate = date;
+        this._date = date;
     }
 
     setPriority(priority) {
         if (![1, 2, 3].includes(priority)) return;
-        this.#inPriority = priority;
+        this._priority = priority;
     }
 
     toggleStatus() {
-        this.#status = !this.#status;
+        this._status = !this._status;
     }
 
     getTitle() {
-        return this.#inTitle;
+        return this._title;
     }
 
     getDescription() {
-        return this.#inDescription;
+        return this._description;
     }
 
     getDate() {
-        return this.#inDate;
+        return this._date;
     }
 
     getPriority() {
-        return this.#inPriority;
+        return this._priority;
     }
 
     getStatus() {
-        return this.#status;
+        return this._status;
     }
 }
