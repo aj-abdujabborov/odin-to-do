@@ -1,4 +1,209 @@
-body {
-    background: blue;
-    color: white;
+@import './universal.scss';
+@import './layout.scss';
+
+:root {
+    // --vert-padding: 20px;
+    --todo-padding-horizontal: 20px;
+    --todo-padding-vertical: 10px;
+    --todo-border-radius: 10px;
+
+    --main-left-margin: 10px;
+    --main-right-margin: 20px;
+    --main-vertical-margins: 20px;
 }
+
+body {
+    margin: 0;
+}
+
+.todo-title {
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.todo-description {
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.todo-details {
+    font-size: 14px;
+    font-weight: 400;
+}
+
+// Layout of cards
+div.todo div.content, div.new-todo div.information {
+    padding: var(--todo-padding-vertical) var(--todo-padding-horizontal);
+    border-radius: var(--todo-border-radius);
+}
+
+// Existing todo items
+div.todo {
+    display: flex;
+    gap: 5px;
+
+    margin-left: -15px;
+    
+    div.button-container {
+        width: 30px;
+        height: 30px;
+        border: 2px solid black;
+        border-radius: 3px;
+        overflow: hidden;
+        margin-top: 5px;
+
+        button {
+            width: 100%;
+            height: 100%;
+            transform: scale(1.1);
+            background: none;
+        }
+    }
+
+    div.content {
+        background-color: paleturquoise;
+        
+        width: 100%;
+
+        display: grid;
+        grid-template-columns: 1fr min-content;
+        grid-template-rows: min-content min-content min-content;
+        row-gap: 5px;
+
+        p, span {
+            margin: 0 0;
+            padding: 0;
+        }
+    
+        p.todo-title {
+            grid-column: 1 / 2;
+        }
+    
+        p.todo-description {
+            grid-column: 1 / -1;
+        }
+    
+        div.details {
+            grid-column: 1 / -1;
+        }
+
+        div.clickables {
+            grid-column: 2 / 3;
+            grid-row: 1 / 2;
+
+            display: flex;
+            gap: 3px;
+
+            button {
+                border: 1px solid black;
+            }
+
+            button#delete-task {
+                margin-left: 20px;
+            }
+        }
+    }
+}
+
+// New to-do item
+div.new-todo {
+    margin-left: 20px;
+}
+
+div.information {
+    background-color: var(--color-brand);
+
+    color: white;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: min-content min-content min-content;
+    row-gap: 5px;
+
+    #title, #description {
+        display: block;
+        width: 100%;
+    }
+
+    #description {
+        resize: none;
+        overflow: auto;
+        background: none;
+    }
+
+    div.details {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        flex-wrap: nowrap;
+        gap: 30px;
+
+        div.date-box, div.priority-box, div.project-box {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+    }
+
+    input[type="date"] {
+        border: 1px solid black;
+    }
+
+    div.priority-box {
+        fieldset.priority-bar {
+            margin: 0;
+            padding: 0;
+        }
+    
+        div.priority-bar {
+            border-radius: 8px;
+            overflow: hidden;
+        
+            display: flex;
+            align-items: center;
+            flex-wrap: nowrap;
+        
+            input[type="radio"] {
+                appearance: none;
+                width: 30px;
+                height: 20px;
+                background: blue;
+                margin: 0;
+                padding: 0;
+                border: 0.5px solid black;
+                transform: scale(1.2);
+            }
+        
+            input#priority1 {
+                background: yellow;
+            }
+        
+            input#priority2 {
+                background: orange;
+            }
+        
+            input#priority3 {
+                background: red;
+            }
+        }
+    }
+
+    div.project-box input {
+        border: 1px solid black;
+        width: 15ch;
+    }
+}
+
+div.new-todo div.submission-buttons {
+    display: flex;
+    gap: 10px;
+    padding: 8px;
+
+    button {
+        background: black;
+        color: white;
+    }
+}
+
+
+
+
