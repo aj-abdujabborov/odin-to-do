@@ -10,7 +10,12 @@ const storageManager = (function(){
             listEl.list.forEach((todoEl) => {
                 const todo = new Todo();
                 for (const prop in todoEl) {
-                    todo[prop] = todoEl[prop];
+                    if (prop == "_date") {
+                        todo[prop] = new Date(todoEl[prop]);
+                    }
+                    else {
+                        todo[prop] = todoEl[prop];
+                    }
                 }
                 listManag.getList(listEl.name).addTodo(todo);
             })

@@ -21,28 +21,11 @@
             </div>
             <h2>Projects</h2>
             <div class="projects">
-                <button>General</button>
             </div>
         </div>
 
         <div class="main">
-            <div class="todo">
-                <div class="button-container">
-                    <button><span class="material-symbols-outlined">delete</span></button>
-                </div>
-                <div class="content">
-                    <p class="todo-title">Pick up kids</p>
-                    <p class="todo-description">Pick them up and bring their sandwiches and go pick them up and bring their sandwiches</p>
-                    <div class="details todo-details">
-                        <span class="date">January 7, 2012</span>
-                        <span class="project">Family</span>
-                    </div>
-                    <div class="clickables">
-                        <button class="icon" id="move-up"><span class="material-symbols-outlined">arrow_upward</span></button>
-                        <button class="icon" id="move-down"><span class="material-symbols-outlined">arrow_downward</span></button>
-                        <button class="icon" id="delete-task"><span class="material-symbols-outlined">delete</span></button>
-                    </div>
-                </div>
+            <div class="todos-container">
             </div>
 
             <div class="new-todo">
@@ -96,5 +79,30 @@
             </div>
         </div>
     </div>
+
+    <template id="project-template">
+        <button class="project-button">General</button>
+    </template>
+
+    <template id="todo-template">
+        <div class="todo">
+            <div class="button-container">
+                <button class="check"><span class="material-symbols-outlined">delete</span></button>
+            </div>
+            <div class="content">
+                <p class="todo-title">Pick up kids</p>
+                <p class="todo-description">Pick them up and bring their sandwiches and go pick them up and bring their sandwiches</p>
+                <div class="details todo-details">
+                    <span class="date">January 7, 2012</span>
+                    <span class="project">Family</span>
+                </div>
+                <div class="clickables">
+                    <button class="icon" id="move-up"><span class="material-symbols-outlined">arrow_upward</span></button>
+                    <button class="icon" id="move-down"><span class="material-symbols-outlined">arrow_downward</span></button>
+                    <button class="icon" id="delete-task"><span class="material-symbols-outlined">delete</span></button>
+                </div>
+            </div>
+        </div>
+    </template>
 </body>
 </html>
