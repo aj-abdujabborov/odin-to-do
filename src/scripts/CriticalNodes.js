@@ -4,7 +4,6 @@ export default (function CriticalNodes() {
         filters: document.querySelector("div.navbar div.filters"),
         main: document.querySelector("div.main"),
         todos: document.querySelector("div.todos-container"),
-        showNewTask: document.querySelector("div.new-todo-container button#show-new-task"),
         numTodayTodos: document.querySelector("div.head span#num-today-todos"),
     }
 
@@ -29,22 +28,26 @@ export default (function CriticalNodes() {
         return {node, todo, check, title, description, date, project, moveUp, moveDown, deleteButton}
     })();
 
-    const newTodo = (function(){
-        const node = document.querySelector("div.new-todo");
-        const form = document.querySelector("form");
-        const title = node.querySelector("input#title");
-        const description = node.querySelector("textarea#description");
-        const date = node.querySelector("input#date");
-        const project = node.querySelector("input#project");
+    const templNewTodo = document.querySelector("template#new-todo").content;
+
+    const getNewTodoNodes = function(parent){
+        const node = parent.querySelector("div.new-todo");
+        const showNewTask = parent.querySelector("button#show-new-task");
+
+        const form = parent.querySelector("form");
+        const title = parent.querySelector("input#title");
+        const description = parent.querySelector("textarea#description");
+        const date = parent.querySelector("input#date");
+        const project = parent.querySelector("input#project");
         const priorityInputName = "priority";
-        const priority1 = node.querySelector("input#priority1");
-        const priority2 = node.querySelector("input#priority2");
-        const priority3 = node.querySelector("input#priority3");
-        const add = node.querySelector("button#add");
-        const cancel = node.querySelector("button#cancel");
+        const priority1 = parent.querySelector("input#priority1");
+        const priority2 = parent.querySelector("input#priority2");
+        const priority3 = parent.querySelector("input#priority3");
+        const add = parent.querySelector("button#add");
+        const cancel = parent.querySelector("button#cancel");
 
-        return {node, form, title, description, date, project, priorityInputName, priority1, priority2, priority3, add, cancel};
-    })();
+        return {showNewTask, node, form, title, description, date, project, priorityInputName, priority1, priority2, priority3, add, cancel};
+    };
 
-    return {page, templProj, templTodo, newTodo};
+    return {page, templProj, templTodo, templNewTodo, getNewTodoNodes};
 })();

@@ -46,6 +46,7 @@ export default (function() {
         "edit": (indexer) => {
             const [projName, index] = splitIndexer(indexer);
 
+            
         },
         addNewTask: (title, description, date, priority, projectName) => {
             if (projectName === '') {
