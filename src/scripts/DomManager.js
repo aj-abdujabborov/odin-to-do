@@ -1,5 +1,9 @@
 import CritNodes from "./CriticalNodes.js";
 
+class NavBar {
+    
+}
+
 export default function DOMManager(logicInterface, navType = "project", projOrNavName = "General") {
     // todo: set min date attribute on input[type="date"] to current day
     // todo: make todos editable with a click on anywhere that's non-button.
@@ -9,6 +13,8 @@ export default function DOMManager(logicInterface, navType = "project", projOrNa
     let NAV_TYPE;
     if (navType === "project") NAV_TYPE = NAV_TYPE_PROJECT; 
     else if (navType == "filter") NAV_TYPE = NAV_TYPE_FILTER;
+
+    let newTodo;
 
     const {page, templProj, templTodo, templNewTodo, getNewTodoNodes} = CritNodes;
 
@@ -42,7 +48,7 @@ export default function DOMManager(logicInterface, navType = "project", projOrNa
             templTodo.check.textContent = elem.status === true ? "check" : "";
             templTodo.title.textContent = elem.title;
             templTodo.description.textContent = elem.description;
-            templTodo.date.textContent = elem.date;
+            templTodo.date.textContent = elem.date.toDateString();
             templTodo.project.textContent = elem.project;
             templTodo.todo.dataset.index = elem.indexer;
 
@@ -53,61 +59,86 @@ export default function DOMManager(logicInterface, navType = "project", projOrNa
 
     function populateNewTodo() {
         page.main.appendChild(templNewTodo.cloneNode(true));
-        return getNewTodoNodes(page.main.lastElementChild);
+        newTodo = getNewTodoNodes(page.main.lastElementChild);
     }
 
-    function renderNewTodoForm(newTodo) {
+    function renderNewTodoForm() {
         newTodo.showNewTask.classList.add("display-none");
         newTodo.node.classList.remove("display-none");
     }
 
-    function hideNewTodoForm(newTodo) {
+    function hideNewTodoForm() {
         newTodo.form.reset();
         newTodo.showNewTask.classList.remove("display-none");
         newTodo.node.classList.add("display-none");
     }
 
-    function makeShowNewTaskButtonClickable(newTodo) {
+    function makeShowNewTaskButtonClickable() {
         newTodo.showNewTask.addEventListener("click", (elem) => {
-            renderNewTodoForm(newTodo);
+            renderNewTodoForm();
         })
     }
 
-    function makeAddTaskButtonClickable(newTodo) {
-        newTodo.form.addEventListener("submit", (elem) => {
-            elem.preventDefault();
+    function addNewTaskEventHandler(elem) {
+        elem.preventDefault();
             
-            const dateValue = newTodo.date.value === '' ? null : new Date(newTodo.date.value);
-            const priorityValue = newTodo.node.querySelector(`input[name='${newTodo.priorityInputName}']:checked`).value;
+        const dateValue = newTodo.date.value === '' ? null : new Date(newTodo.date.value);
+        const priorityValue = newTodo.node.querySelector(`input[name='${newTodo.priorityInputName}']:checked`).value;
 
-            logicInterface.addNewTask(newTodo.title.value, newTodo.description.value, dateValue, Number(priorityValue), newTodo.project.value);
-            
-            repopulateData();
-        })
+        logicInterface.addNewTask(newTodo.title.value, newTodo.description.value, dateValue, Number(priorityValue), newTodo.project.value);
+        
+        repopulateData();
     }
 
-    function makeCancelTaskButtonClickable(newTodo) {
+    function editExistingTaskEventHandler() {
+
+    }
+
+    function makeAddTaskButtonClickable() {
+        newTodo.form.addEventListener("submit", addNewTaskEventHandler);
+    }
+
+    function makeCancelTaskButtonClickable() {
         newTodo.cancel.addEventListener("click", () => {
-            hideNewTodoForm(newTodo);
+            repopulateData();
         })
     }
 
     function handleNewTodo() {
         const newTodo = populateNewTodo();
-        makeShowNewTaskButtonClickable(newTodo);
-        makeAddTaskButtonClickable(newTodo);
-        makeCancelTaskButtonClickable(newTodo);
+        makeShowNewTaskButtonClickable();
+        makeAddTaskButtonClickable();
+        makeCancelTaskButtonClickable();
     }
     
     function editExistingTodo(element) {
         hideNewTodoForm();
+        page.main.replaceChild(newTodo.node, element);
 
-        // hide add new task thing at bottom if it's there
-        // copy the entire new-todo-container thing
-        // fill in all the existing values
-        // change button text from 'Add task' to 'Update task'
-        // if cancel is pressed, simply re-render everything
-        // if add is pressed, use logicInterace to update the element, then re-render
+        renderNewTodoForm(); // newTodo is now the edit form. references are maintained
+        const todoInfo = logicInterface.getTodoByIndexer(element.dataset.index);
+        newTodo.title.value = todoInfo.title;
+        newTodo.description.value = todoInfo.description;
+        newTodo.date.value = todoInfo.date.toISOString().slice(0,10);
+        newTodo.priorityRadios[todoInfo.priority-1].setAttribute("checked", true);
+        newTodo.project.value = todoInfo.project;
+        
+        newTodo.add.textContent = "Update task";
+
+        newTodo.form.removeEventListener("submit", addNewTaskEventHandler);
+        newTodo.form.addEventListener("submit", () => {
+            const dateValue = newTodo.date.value === '' ? null : new Date(newTodo.date.value);
+            const priorityValue = newTodo.node.querySelector(`input[name='${newTodo.priorityInputName}']:checked`).value;
+
+            logicInterface.editTodo(element.dataset.index, 
+                                    newTodo.title.value, 
+                                    newTodo.description.value, 
+                                    dateValue, 
+                                    priorityValue, 
+                                    newTodo.project.value);
+
+            repopulateData();
+        });
     }
 
     (function setupClicks() {
@@ -171,11 +202,6 @@ export default function DOMManager(logicInterface, navType = "project", projOrNa
         page.numTodayTodos.textContent = logicInterface.getNumTodayTodos();
 
     }
-
-
-
-
-
 
     repopulateData();
 };

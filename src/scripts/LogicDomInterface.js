@@ -6,16 +6,20 @@ export default (function() {
 
     function formatTodosIntoObjects(list) {
         return list.map((elem) => {
-            return {
-                title: elem.getTitle(),
-                description: elem.getDescription(),
-                date: elem.getDate().toDateString(),
-                priority: elem.getPriority(),
-                status: elem.getStatus(),
-                project: elem.getProject(),
-                indexer: makeIndexer(elem.getProject(), elem.getIndex()),
-            };
+            return formatTodoIntoObject(elem);
         })
+    }
+
+    function formatTodoIntoObject(elem) {
+        return {
+            title: elem.getTitle(),
+            description: elem.getDescription(),
+            date: elem.getDate(),
+            priority: elem.getPriority(),
+            status: elem.getStatus(),
+            project: elem.getProject(),
+            indexer: makeIndexer(elem.getProject(), elem.getIndex()),
+        };
     }
 
     function makeIndexer(projectName, index) {
@@ -46,7 +50,7 @@ export default (function() {
         "edit": (indexer) => {
             const [projName, index] = splitIndexer(indexer);
 
-            
+
         },
         addNewTask: (title, description, date, priority, projectName) => {
             if (projectName === '') {
@@ -80,7 +84,27 @@ export default (function() {
         },
         getNumTodayTodos: () => {
             return LM.getTodayTodos().length;
-        }
+        },
+        getTodoByIndexer(indexer) {
+            const [projName, index] = splitIndexer(indexer);
+            return formatTodoIntoObject(LM.getList(projName).getTodo(index));
+        },
+        editTodo(indexer, title, description, date, priority, projectName) {
+            const [projName, index] = splitIndexer(indexer);
+
+            const todo = LM.getList(projName).getTodo(index);
+            todo.setTitle(title);
+            todo.setDescription(description);
+            todo.setDate(date);
+            todo.setPriority(priority);
+            
+            if (projName !== projectName) {
+                if (!LM.getListNames().includes(projectName)) {
+                    LM.addList(projectName);
+                }
+                LM.moveTodoToProject(projName, index, projectName);
+            }
+        },
     }
 
     function initializer(listManager) {

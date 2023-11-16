@@ -40,13 +40,11 @@ export default (function CriticalNodes() {
         const date = parent.querySelector("input#date");
         const project = parent.querySelector("input#project");
         const priorityInputName = "priority";
-        const priority1 = parent.querySelector("input#priority1");
-        const priority2 = parent.querySelector("input#priority2");
-        const priority3 = parent.querySelector("input#priority3");
+        const priorityRadios = [parent.querySelector("input#priority1"), parent.querySelector("input#priority2"), parent.querySelector("input#priority3")];
         const add = parent.querySelector("button#add");
         const cancel = parent.querySelector("button#cancel");
 
-        return {showNewTask, node, form, title, description, date, project, priorityInputName, priority1, priority2, priority3, add, cancel};
+        return {showNewTask, node, form, title, description, date, project, priorityInputName, priorityRadios, add, cancel};
     };
 
     return {page, templProj, templTodo, templNewTodo, getNewTodoNodes};

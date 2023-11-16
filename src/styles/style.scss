@@ -159,37 +159,37 @@ div.information {
             padding: 0;
         }
     
-        div.priority-bar {
-            border-radius: 8px;
-            overflow: hidden;
+        // div.priority-bar {
+        //     border-radius: 8px;
+        //     overflow: hidden;
         
-            display: flex;
-            align-items: center;
-            flex-wrap: nowrap;
+        //     display: flex;
+        //     align-items: center;
+        //     flex-wrap: nowrap;
         
-            input[type="radio"] {
-                appearance: none;
-                width: 30px;
-                height: 20px;
-                background: blue;
-                margin: 0;
-                padding: 0;
-                border: 0.5px solid black;
-                transform: scale(1.2);
-            }
+        //     input[type="radio"] {
+        //         appearance: none;
+        //         width: 30px;
+        //         height: 20px;
+        //         background: blue;
+        //         margin: 0;
+        //         padding: 0;
+        //         border: 0.5px solid black;
+        //         transform: scale(1.2);
+        //     }
         
-            input#priority1 {
-                background: yellow;
-            }
+        //     input#priority1 {
+        //         background: yellow;
+        //     }
         
-            input#priority2 {
-                background: orange;
-            }
+        //     input#priority2 {
+        //         background: orange;
+        //     }
         
-            input#priority3 {
-                background: red;
-            }
-        }
+        //     input#priority3 {
+        //         background: red;
+        //     }
+        // }
     }
 
     div.project-box input {

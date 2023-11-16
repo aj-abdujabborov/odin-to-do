@@ -19,4 +19,4 @@ else {
 }
 
 const logicInterface = LogicDomInterface(LM);
-DOMManager(logicInterface,  'project', LM.getDefaultProject());
+DOMManager(logicInterface, 'project', LM.getDefaultProject());
