@@ -81,7 +81,9 @@ export default function DOMManager(logicInterface, storage, navType = "project",
         const dateValue = newTodo.date.value === '' ? null : new Date(newTodo.date.value);
         const priorityValue = newTodo.node.querySelector(`input[name='${newTodo.priorityInputName}']:checked`).value;
 
-        logicInterface.addNewTask(newTodo.title.value, newTodo.description.value, dateValue, Number(priorityValue), newTodo.project.value);
+        const projectValue = NAV_TYPE === NAV_TYPE_FILTER ? newTodo.project.value : (newTodo.project.value === "" ? projOrNavName : newTodo.project.value);
+
+        logicInterface.addNewTask(newTodo.title.value, newTodo.description.value, dateValue, Number(priorityValue), projectValue);
         
         repopulateData();
     }
