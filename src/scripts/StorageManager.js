@@ -1,11 +1,13 @@
 import Todo from './Todo.js'
 
 const storageManager = (function(){
-    const loadInto = (listManag) => {
+    let LM;
+
+    const load = () => {
         const lists = JSON.parse(localStorage.getItem("todos"));
 
         lists.forEach((listEl) => {
-            listManag.addList(listEl.name);
+            LM.addList(listEl.name);
 
             listEl.list.forEach((todoEl) => {
                 const todo = new Todo();
@@ -17,17 +19,22 @@ const storageManager = (function(){
                         todo[prop] = todoEl[prop];
                     }
                 }
-                listManag.getList(listEl.name).addTodo(todo);
+                LM.getList(listEl.name).addTodo(todo);
             })
         })
     }
 
-    const saveFrom = (listManag) => {
+    const save = () => {
         localStorage.clear();
-        localStorage.setItem("todos", JSON.stringify(listManag.getAllLists()));
+        localStorage.setItem("todos", JSON.stringify(LM.getAllLists()));
     }
 
-    return {loadInto, saveFrom};
+    const initializer = (listManag) => {
+        LM = listManag;
+        return {load, save};
+    }
+
+    return initializer;
 })();
 
 export default storageManager;

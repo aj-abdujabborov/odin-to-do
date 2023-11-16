@@ -1,10 +1,6 @@
 import CritNodes from "./CriticalNodes.js";
 
-class NavBar {
-    
-}
-
-export default function DOMManager(logicInterface, navType = "project", projOrNavName = "General") {
+export default function DOMManager(logicInterface, storage, navType = "project", projOrNavName = "General") {
     // todo: set min date attribute on input[type="date"] to current day
     // todo: make todos editable with a click on anywhere that's non-button.
     // todo: make project buttons reflect state
@@ -192,6 +188,8 @@ export default function DOMManager(logicInterface, navType = "project", projOrNa
 
 
     function repopulateData() {
+        storage.save();
+
         populateNavbar();
 
         if (NAV_TYPE === NAV_TYPE_PROJECT) {populateTodosFromProject(projOrNavName);}
@@ -200,7 +198,6 @@ export default function DOMManager(logicInterface, navType = "project", projOrNa
         handleNewTodo();
 
         page.numTodayTodos.textContent = logicInterface.getNumTodayTodos();
-
     }
 
     repopulateData();
