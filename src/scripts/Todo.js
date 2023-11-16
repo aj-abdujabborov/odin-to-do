@@ -37,6 +37,10 @@ export default class Todo {
         this._project = projectName;
     }
 
+    setIndex(index) {
+        this._index = index;
+    }
+
     toggleStatus() {
         this._status = !this._status;
     }
@@ -63,5 +67,9 @@ export default class Todo {
 
     getProject() {
         return this._project;
+    }
+
+    getIndex(index) {
+        return this._index;
     }
 }

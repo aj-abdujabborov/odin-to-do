@@ -31,32 +31,28 @@ export default class TodoList {
         }
         todo.setProject(this.name);
         this.list.push(todo);
+
+        this._reindex();
     }
 
-    removeTodo(input) {
-        const todoInd = this.#getTodoIndex(input);
-
-        this.list.splice(todoInd, 1);
+    removeTodo(index) {
+        this.list.splice(index, 1);
+        this._reindex();
     }
 
-    moveTodoUp(input) {
-        const todoInd = this.#getTodoIndex(input);
-
-        if (todoInd == 0 || todoInd == -1) return;
-        this.list.splice(todoInd-1, 2, this.list[todoInd], this.list[todoInd-1]);
+    moveTodoUp(index) {
+        if (index == 0 || index == -1) return;
+        this.list.splice(index-1, 2, this.list[index], this.list[index-1]);
     }
 
-    moveTodoDown(input) {
-        const todoInd = this.#getTodoIndex(input);
-
-        if (todoInd == this.list.length-1 || todoInd == -1) return;
-        this.list.splice(todoInd, 2, this.list[todoInd+1], this.list[todoInd]);
+    moveTodoDown(index) {
+        if (index == this.list.length-1 || index == -1) return;
+        this.list.splice(index, 2, this.list[index+1], this.list[index]);
     }
 
-    #getTodoIndex(input) {
-        if (input instanceof Todo) {
-            return this.list.indexOf(input);
-        }
-        return input;
+    _reindex() {
+        this.list.forEach((elem, ind) => {
+            elem.setIndex(ind);
+        })
     }
 }

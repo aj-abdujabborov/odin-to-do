@@ -48,8 +48,7 @@ export default function DOMManager(logicInterface, navType = "project", projOrNa
                     throw Error("The element has an action attribute but no programmed action");
                 }
 
-
-                logicInterface[elem.dataset.action](projOrNavName, parElem);
+                logicInterface[elem.dataset.action](parElem.dataset.index);
                 repopulateData();
             })
         }
@@ -88,6 +87,7 @@ export default function DOMManager(logicInterface, navType = "project", projOrNa
         makeCancelTaskButtonClickable();
     })();
 
+
     function renderNewTodoForm() {
         page.showNewTask.classList.add("display-none");
         newTodo.node.classList.remove("display-none");
@@ -98,6 +98,7 @@ export default function DOMManager(logicInterface, navType = "project", projOrNa
         page.showNewTask.classList.remove("display-none");
         newTodo.node.classList.add("display-none");
     }
+
     
     function repopulateData() {
         function populateNavbar() {
@@ -111,22 +112,28 @@ export default function DOMManager(logicInterface, navType = "project", projOrNa
         }
     
         function populateTodosFromProject(projectName) {
+            templTodo.moveUp.classList.remove("display-none");
+            templTodo.moveDown.classList.remove("display-none");
+
             populateTodosFromArray(logicInterface.getTodosFromProject(projectName));
         }
 
         function populateTodosFromFilter(filterName) {
+            templTodo.moveUp.classList.add("display-none");
+            templTodo.moveDown.classList.add("display-none");
+
             populateTodosFromArray(logicInterface.getTodosFromFilter(filterName));
         }
 
         function populateTodosFromArray(list) {
             page.todos.innerText = "";
-            list.forEach( (elem, ind) => {
-                templTodo.check.textContent = elem.getStatus() === true ? "check" : "";
-                templTodo.title.textContent = elem.getTitle();
-                templTodo.description.textContent = elem.getDescription();
-                templTodo.date.textContent = elem.getDate().toDateString();
-                templTodo.project.textContent = elem.getProject();
-                templTodo.todo.dataset.index = ind;
+            list.forEach((elem) => {
+                templTodo.check.textContent = elem.status === true ? "check" : "";
+                templTodo.title.textContent = elem.title;
+                templTodo.description.textContent = elem.description;
+                templTodo.date.textContent = elem.date;
+                templTodo.project.textContent = elem.project;
+                templTodo.todo.dataset.index = elem.indexer;
     
                 const currTodo = templTodo.todo.cloneNode(true);
                 page.todos.appendChild(currTodo);

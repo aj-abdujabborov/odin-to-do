@@ -3,22 +3,48 @@ import Todo from './Todo.js';
 export default (function() {
     let initialized = false;
     let LM;
-    let currentList;
+
+    function formatTodosIntoObjects(list) {
+        return list.map((elem) => {
+            return {
+                title: elem.getTitle(),
+                description: elem.getDescription(),
+                date: elem.getDate().toDateString(),
+                priority: elem.getPriority(),
+                status: elem.getStatus(),
+                project: elem.getProject(),
+                indexer: makeIndexer(elem.getProject(), elem.getIndex()),
+            };
+        })
+    }
+
+    function makeIndexer(projectName, index) {
+        return [projectName, index].join('-');
+    }
+
+    function splitIndexer(indexer) {
+        return indexer.split('-');
+    }
 
     const logicDomInterface = {
-        "move-up": (projName, parElem) => {
-            LM.getList(projName).moveTodoUp(Number(parElem.dataset.index));
+        "move-up": (indexer) => {
+            const [projName, index] = splitIndexer(indexer);
+            LM.getList(projName).moveTodoUp(Number(index));
         },
-        "move-down": (projName, parElem) => {
-            LM.getList(projName).moveTodoDown(Number(parElem.dataset.index));
+        "move-down": (indexer) => {
+            const [projName, index] = splitIndexer(indexer);
+            LM.getList(projName).moveTodoDown(Number(index));
         },
-        "delete-task": (projName, parElem) => {
-            LM.getList(projName).removeTodo(Number(parElem.dataset.index));
+        "delete-task": (indexer) => {
+            const [projName, index] = splitIndexer(indexer);
+            LM.getList(projName).removeTodo(Number(index));
         },
-        "check": (projName, parElem) => {
-            LM.getList(projName).getTodo(Number(parElem.dataset.index)).toggleStatus();
+        "check": (indexer) => {
+            const [projName, index] = splitIndexer(indexer);
+            LM.getList(projName).getTodo(Number(index)).toggleStatus();
         },
-        "edit": (elem, parElem) => {
+        "edit": (indexer) => {
+            const [projName, index] = splitIndexer(indexer);
 
         },
         addNewTask: (title, description, date, priority, projectName) => {
@@ -39,16 +65,16 @@ export default (function() {
             return LM.getListNames();
         },
         getTodosFromProject: (projectName) => {
-            return LM.getList(projectName).getAllTodos();
+            return formatTodosIntoObjects(LM.getList(projectName).getAllTodos());
         },
         getTodosFromFilter: (filterName) => {
             switch (filterName.toLowerCase()) {
                 case 'today':
-                    return LM.getTodayTodos();
+                    return formatTodosIntoObjects(LM.getTodayTodos());
                 case 'high-priority':
-                    return LM.getHighPriorityTodos();
+                    return formatTodosIntoObjects(LM.getHighPriorityTodos());
                 case 'all':
-                    return LM.getAllTodos();
+                    return formatTodosIntoObjects(LM.getAllTodos());
             }
         },
         getNumTodayTodos: () => {

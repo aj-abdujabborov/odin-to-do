@@ -6,8 +6,6 @@ import LogicDomInterface from "./scripts/LogicDomInterface.js";
 import DOMManager from "./scripts/DomManager.js";
 
 const LM = new ListManager();
-const logicInterface = LogicDomInterface(LM);
-
 if (localStorage.length == 0) {
     LM.addList("General");
     LM.getList("General").addTodo(new Todo("Wash dishes", "Use new scrubber", new Date("2023-11-28")));
@@ -20,4 +18,5 @@ else {
     StorageManager.loadInto(LM);
 }
 
+const logicInterface = LogicDomInterface(LM);
 DOMManager(logicInterface,  'project', LM.getDefaultProject());
