@@ -24,7 +24,7 @@ export default class Todo {
     }
 
     setDate(date) {
-        if (!(date instanceof Date) || Date.now() > date.getTime()) return;
+        if (!(date instanceof Date)) return;
         this._date = date;
     }
 

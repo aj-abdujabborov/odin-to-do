@@ -9,10 +9,10 @@ const LM = new ListManager();
 const storage = StorageManager(LM);
 if (localStorage.length == 0) {
     LM.addList("General");
-    LM.getList("General").addTodo(new Todo("Wash dishes", "Use new scrubber", new Date("2023-11-28")));
-    LM.getList("General").addTodo(new Todo("Order groceries"));
+    LM.getList("General").addTodo(new Todo("Wash dishes", "Morning time while making coffee", new Date("2023-11-18")));
+    LM.getList("General").addTodo(new Todo("Take fiber"));
     LM.addList("Work");
-    LM.getList("Work").addTodo(new Todo("Make presentation"));
+    LM.getList("Work").addTodo(new Todo("Supervise exams", "", new Date("2023-11-22"), 3));
     storage.save();
 }
 else {
