@@ -1,7 +1,7 @@
 import Todo from './Todo.js'
 
 const storageManager = (function(){
-    const load = (listManag) => {
+    const loadInto = (listManag) => {
         const lists = JSON.parse(localStorage.getItem("todos"));
 
         lists.forEach((listEl) => {
@@ -22,12 +22,12 @@ const storageManager = (function(){
         })
     }
 
-    const save = (listManag) => {
+    const saveFrom = (listManag) => {
         localStorage.clear();
         localStorage.setItem("todos", JSON.stringify(listManag.getAllLists()));
     }
 
-    return {load, save};
+    return {loadInto, saveFrom};
 })();
 
 export default storageManager;

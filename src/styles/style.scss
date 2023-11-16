@@ -105,6 +105,11 @@ div.todo {
     }
 }
 
+// New to-do button
+button.show-new-task {
+    border: 2px solid black;
+}
+
 // New to-do item
 div.new-todo {
     margin-left: 20px;

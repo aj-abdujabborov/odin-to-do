@@ -21,6 +21,15 @@ export default class ListManager {
         return this.lists.map((element) => element.name);
     }
 
+    getDefaultProject() {
+        if (this.lists.length > 0) {
+            return this.getListNames()[0];
+        }
+
+        this.addList('General');
+        return this.getList('General');
+    }
+
     addList(name) {
         if (this.getListNames().includes(name)) {
             throw Error("List with this name already exists");
@@ -40,7 +49,7 @@ export default class ListManager {
         this.getList(oldProjectName).removeTodo(todo);
     }
 
-    getSuperList() {
+    getAllTodos() {
         let newList = [];
         for (let i = 0; i < this.lists.length; i++) {
             newList = [...newList, ...this.lists[i].getAllTodos()];
@@ -52,6 +61,14 @@ export default class ListManager {
         let newList = [];
         for (let i = 0; i < this.lists.length; i++) {
             newList = [...newList, ...this.lists[i].getTodayTodos()];
+        }
+        return newList;
+    }
+
+    getHighPriorityTodos() {
+        let newList = [];
+        for (let i = 0; i < this.lists.length; i++) {
+            newList = [...newList, ...this.lists[i].getHighPriorityTodos()];
         }
         return newList;
     }

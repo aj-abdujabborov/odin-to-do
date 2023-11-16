@@ -21,10 +21,15 @@ export default class TodoList {
         return this.list.filter((element) => isSameDay(element.getDate(), now));
     }
 
+    getHighPriorityTodos() {
+        return this.list.filter((element) => element.getPriority() === 3);
+    }
+
     addTodo(todo) {
         if (!(todo instanceof Todo)) {
             throw Error("todo must be instance of Todo class");
         }
+        todo.setProject(this.name);
         this.list.push(todo);
     }
 

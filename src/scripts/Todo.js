@@ -4,6 +4,7 @@ export default class Todo {
     _description = "";
     _date = new Date();
     _priority = 1;
+    _project = null;
 
     constructor(title, description, date, priority) {
         this.setTitle(title);
@@ -32,6 +33,10 @@ export default class Todo {
         this._priority = priority;
     }
 
+    setProject(projectName) {
+        this._project = projectName;
+    }
+
     toggleStatus() {
         this._status = !this._status;
     }
@@ -54,5 +59,9 @@ export default class Todo {
 
     getStatus() {
         return this._status;
+    }
+
+    getProject() {
+        return this._project;
     }
 }
