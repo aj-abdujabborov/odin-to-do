@@ -9,11 +9,11 @@ export default function DOMManager(
   // todo: set min date attribute on input[type="date"] to current day
   // todo: make project buttons reflect status
 
-  const NAV_TYPE_PROJECT = 1,
-    NAV_TYPE_FILTER = 2;
+  const NAV_TYPE_PROJECT = 1;
+  const NAV_TYPE_FILTER = 2;
   let NAV_TYPE;
   if (navType === "project") NAV_TYPE = NAV_TYPE_PROJECT;
-  else if (navType == "filter") NAV_TYPE = NAV_TYPE_FILTER;
+  else if (navType === "filter") NAV_TYPE = NAV_TYPE_FILTER;
 
   let newTodo;
 

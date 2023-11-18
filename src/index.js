@@ -28,3 +28,28 @@ if (localStorage.length == 0) {
 
 const logicInterface = LogicDomInterface(LM);
 DOMManager(logicInterface, storage, "project", LM.getDefaultProject());
+
+(function menuSetup() {
+  const menuButtons = document.querySelectorAll("div.menu-button");
+
+  menuButtons.forEach((button) => {
+    const classThatHasID = [...button.classList].find(
+      (buttonClass) => buttonClass.substring(0, 3) === "id-",
+    );
+    if (classThatHasID === undefined) return;
+
+    const id = classThatHasID.split("-")[1];
+    const menuBox = document.querySelector(`div.menu-box.id-${id}`);
+
+    const initialDisplayStyle = window.getComputedStyle(menuBox).display;
+
+    button.addEventListener("click", () => {
+      menuBox.classList.toggle("hide");
+      // if (menuBox.style.display === "none") {
+      //   menuBox.style.display = initialDisplayStyle;
+      // } else {
+      //   menuBox.style.display = "none";
+      // }
+    });
+  });
+})();

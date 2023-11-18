@@ -26,8 +26,8 @@ div.head {
   padding: 10px var(--side-padding);
 
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  gap: 30px;
 
   div.site-name {
     display: flex;
@@ -39,6 +39,8 @@ div.head {
     span {
       font-size: 50px;
     }
+
+    margin-left: auto;
   }
 }
 
@@ -46,6 +48,9 @@ div.navbar {
   background: var(--color-light);
   padding: 0 var(--side-padding);
   color: var(--font-color-light);
+
+  grid-column: 1 / 2;
+  transition: all 200ms ease-in-out;
 
   h2 {
     border-color: var(--font-color-light);
@@ -67,10 +72,25 @@ div.navbar {
   }
 }
 
-div.main {
-  background: var(--color-main);
+div.navbar.hide {
+  transform: translate(-100%, 0);
+}
 
+div.navbar.hide + div.main {
+  // grid-column: 1 / -1;
+  // adding this is making the animation choppy because grid is activated immediately whereas the translation is not
+  transform: translate(-15%, 0);
+  // hard-coded, suboptimal behavior
+}
+
+div.main {
+  transition: all 200ms ease-in-out;
+
+  background: var(--color-main);
   padding: 20px var(--side-padding);
+
+  grid-column: 2 / 3;
+  grid-row: 2 / 3;
 
   display: grid;
   grid-template-rows: max-content;
