@@ -14,7 +14,7 @@ module.exports = merge(common, {
         use: {
           loader: "babel-loader",
           options: {
-            presets: [["@babel/preset-env"]],
+            presets: [["@babel/preset-env", { targets: ">0.25%, not dead" }]], // browser must have >0.25% of market share
           },
         },
       },
