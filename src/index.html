@@ -1,110 +1,189 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Doing It</title>
-</head>
-<body>
+  </head>
+  <body>
     <div class="container">
-        <div class="head">
-            <div class="site-name"><span class="material-symbols-outlined">done_all</span><h1>Doing It</h1></div>
-            <div class="num-today-todos"><span id="num-today-todos">0</span> tasks remaining today</div>
+      <div class="head">
+        <div class="site-name">
+          <span class="material-symbols-outlined">done_all</span>
+          <h1>Doing It</h1>
         </div>
+        <div class="num-today-todos">
+          <span id="num-today-todos">0</span> tasks remaining today
+        </div>
+      </div>
 
-        <div class="navbar">
-            <h2>Filters</h2>
-            <div class="filters">
-                <button class="filter-button" id="today"><span class="material-symbols-outlined">event</span>Today</button>
-                <button class="filter-button" id="high-priority"><span class="material-symbols-outlined">priority_high</span>High Priority</button>
-                <button class="filter-button" id="all"><span class="material-symbols-outlined">layers</span>All</button>
-            </div>
-            <h2>Projects</h2>
-            <div class="projects">
-            </div>
+      <div class="navbar">
+        <h2>Filters</h2>
+        <div class="filters">
+          <button class="filter-button" id="today">
+            <span class="material-symbols-outlined">event</span>Today
+          </button>
+          <button class="filter-button" id="high-priority">
+            <span class="material-symbols-outlined">priority_high</span>High
+            Priority
+          </button>
+          <button class="filter-button" id="all">
+            <span class="material-symbols-outlined">layers</span>All
+          </button>
         </div>
+        <h2>Projects</h2>
+        <div class="projects"></div>
+      </div>
 
-        <div class="main">
-        </div>
+      <div class="main"></div>
     </div>
 
     <template id="new-todo">
-        <div class="new-todo-container">
-            <button id="show-new-task" class="show-new-task" data-action="add-task"><span class="material-symbols-outlined">add</span>Add task</button>
-            <div class="new-todo display-none">
-                <form>
-                    <div class="information">
-                        <label for="title" class="screen-read">Task name</label>
-                        <input class="todo-title" type="text" id="title" name="title" placeholder="Task name" required>
-    
-                        <label for="description" class="screen-read">Task description</label>
-                        <textarea class="todo-description" name="description" id="description" placeholder="Description" rows="2"></textarea>
-    
-                        <div class="details todo-details">
-                            <div class="date-box">
-                                <label for="date">Date</label>
-                                <input type="date" id="date" name="date" min="2000-01-01">
-                            </div>
-                        
-                            <div class="priority-box">
-                                <span>Priority</span>
-                                <fieldset class="priority-bar">
-                                    <legend class="screen-read">Priority</legend>
-                                    <div class="priority-bar">
-                                        <input type="radio" id="priority1" name="priority" value="1" checked>
-                                        <label for="priority1" class="section-label screen-read">Priority 1</label>
-                                        <input type="radio" id="priority2" name="priority" value="2">
-                                        <label for="priority2" class="section-label screen-read">Priority 2</label>
-                                        <input type="radio" id="priority3" name="priority" value="3">
-                                        <label for="priority3" class="section-label screen-read">Priority 3</label>
-                                    </div>
-                                </fieldset>
-                            </div>
-    
-                            <div class="project-box">
-                                <label for="project">Project</label>
-                                <input list="projects-list" id="project" name="project">
-                                <datalist id="projects-list">
-                                    <option value="General">General</option>
-                                    <option value="Chores">Chores</option>
-                                    <option value="Family">Family</option>
-                                </datalist>
-                            </div>
-                        </div>
+      <div class="new-todo-container">
+        <button id="show-new-task" class="show-new-task" data-action="add-task">
+          <span class="material-symbols-outlined">add</span>Add task
+        </button>
+        <div class="new-todo display-none">
+          <form>
+            <div class="information">
+              <label for="title" class="screen-read">Task name</label>
+              <input
+                class="todo-title"
+                type="text"
+                id="title"
+                name="title"
+                placeholder="Task name"
+                required
+              />
+
+              <label for="description" class="screen-read"
+                >Task description</label
+              >
+              <textarea
+                class="todo-description"
+                name="description"
+                id="description"
+                placeholder="Description"
+                rows="2"
+              ></textarea>
+
+              <div class="details todo-details">
+                <div class="date-box">
+                  <label for="date">Date</label>
+                  <input type="date" id="date" name="date" min="2000-01-01" />
+                </div>
+
+                <div class="priority-box">
+                  <span>Priority</span>
+                  <fieldset class="priority-bar">
+                    <legend class="screen-read">Priority</legend>
+                    <div class="priority-bar">
+                      <input
+                        type="radio"
+                        id="priority1"
+                        name="priority"
+                        value="1"
+                        checked
+                      />
+                      <label for="priority1" class="section-label screen-read"
+                        >Priority 1</label
+                      >
+                      <input
+                        type="radio"
+                        id="priority2"
+                        name="priority"
+                        value="2"
+                      />
+                      <label for="priority2" class="section-label screen-read"
+                        >Priority 2</label
+                      >
+                      <input
+                        type="radio"
+                        id="priority3"
+                        name="priority"
+                        value="3"
+                      />
+                      <label for="priority3" class="section-label screen-read"
+                        >Priority 3</label
+                      >
                     </div>
-    
-                    <div class="submission-buttons">
-                        <button id="add" type="submit"><span class="material-symbols-outlined">add</span>Add task</button>
-                        <button id="cancel" type="button"><span class="material-symbols-outlined">cancel</span>Cancel</button>
-                    </div>
-                </form>
+                  </fieldset>
+                </div>
+
+                <div class="project-box">
+                  <label for="project">Project</label>
+                  <input list="projects-list" id="project" name="project" />
+                  <datalist id="projects-list">
+                    <option value="General">General</option>
+                    <option value="Chores">Chores</option>
+                    <option value="Family">Family</option>
+                  </datalist>
+                </div>
+              </div>
             </div>
+
+            <div class="submission-buttons">
+              <button id="add" type="submit">
+                <span class="material-symbols-outlined">add</span>Add task
+              </button>
+              <button id="cancel" type="button">
+                <span class="material-symbols-outlined">cancel</span>Cancel
+              </button>
+            </div>
+          </form>
         </div>
+      </div>
     </template>
 
     <template id="project-template">
-        <button class="project-button">General</button>
+      <button class="project-button">General</button>
     </template>
 
     <template id="todo-template">
-        <div class="todo" data-index="" data-action="edit">
-            <div class="button-container">
-                <button type="button" class="check" id="check" data-action="check"><span class="material-symbols-outlined">delete</span></button>
-            </div>
-            <div class="content">
-                <p class="todo-title">Pick up kids</p>
-                <p class="todo-description">Pick them up and bring their sandwiches and go pick them up and bring their sandwiches</p>
-                <div class="details todo-details">
-                    <span class="date">January 7, 2012</span>
-                    <span class="project">Family</span>
-                </div>
-                <div class="clickables">
-                    <button type="button" class="icon" id="move-up" data-action="move-up"><span class="material-symbols-outlined">arrow_upward</span></button>
-                    <button type="button" class="icon" id="move-down" data-action="move-down"><span class="material-symbols-outlined">arrow_downward</span></button>
-                    <button type="button" class="icon" id="delete-task" data-action="delete-task"><span class="material-symbols-outlined">delete</span></button>
-                </div>
-            </div>
+      <div class="todo" data-index="" data-action="edit">
+        <div class="button-container">
+          <button type="button" class="check" id="check" data-action="check">
+            <span class="material-symbols-outlined">delete</span>
+          </button>
         </div>
+        <div class="content">
+          <p class="todo-title">Pick up kids</p>
+          <p class="todo-description">
+            Pick them up and bring their sandwiches and go pick them up and
+            bring their sandwiches
+          </p>
+          <div class="details todo-details">
+            <span class="date">January 7, 2012</span>
+            <span class="project">Family</span>
+          </div>
+          <div class="clickables">
+            <button
+              type="button"
+              class="icon"
+              id="move-up"
+              data-action="move-up"
+            >
+              <span class="material-symbols-outlined">arrow_upward</span>
+            </button>
+            <button
+              type="button"
+              class="icon"
+              id="move-down"
+              data-action="move-down"
+            >
+              <span class="material-symbols-outlined">arrow_downward</span>
+            </button>
+            <button
+              type="button"
+              class="icon"
+              id="delete-task"
+              data-action="delete-task"
+            >
+              <span class="material-symbols-outlined">delete</span>
+            </button>
+          </div>
+        </div>
+      </div>
     </template>
-</body>
+  </body>
 </html>

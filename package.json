@@ -6,15 +6,21 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack --config ./webpack.prod.js",
-    "start": "webpack serve --config ./webpack.dev.js"
+    "start": "webpack serve --config ./webpack.dev.js",
+    "pages": "git subtree push --prefix dist origin gh-pages"
   },
   "author": "AJ Abdujabborov",
   "license": "ISC",
   "devDependencies": {
     "css-loader": "^6.8.1",
+    "eslint": "^8.53.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-import": "^2.29.0",
     "html-loader": "^4.2.0",
     "html-webpack-plugin": "^5.5.3",
     "mini-css-extract-plugin": "^2.7.6",
+    "prettier": "3.1.0",
     "sass": "^1.69.5",
     "sass-loader": "^13.3.2",
     "style-loader": "^3.3.3",

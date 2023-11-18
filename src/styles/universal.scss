@@ -1,83 +1,84 @@
-@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,400;0,500;0,900;1,700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200');
+@import url("https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,400;0,500;0,900;1,700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200");
 
 // Resets
-input, textarea {
-    color: inherit;
-    font-size: inherit;
-    font-family: inherit;
-    outline: none;
-    border: none;
-    padding: 0;
-    background: none;
+input,
+textarea {
+  color: inherit;
+  font-size: inherit;
+  font-family: inherit;
+  outline: none;
+  border: none;
+  padding: 0;
+  background: none;
 }
 
 p {
-    margin: 0;
-    padding: 0;
+  margin: 0;
+  padding: 0;
 }
 
 fieldset {
-    border: none;
-    outline: none;
+  border: none;
+  outline: none;
 }
 
 button {
-    appearance: none;
-    border: none;
-    outline: none;
-    padding: none;
-    margin: none;
-    background: white;
-    font-family: inherit;
-    font-size: inherit;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  appearance: none;
+  border: none;
+  outline: none;
+  padding: none;
+  margin: none;
+  background: white;
+  font-family: inherit;
+  font-size: inherit;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 //
 :root {
-    font-family: 'Raleway', sans-serif;
+  font-family: "Raleway", sans-serif;
 }
 
 * {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 .screen-read {
-    position: absolute;
-    width: 1px !important;
-    height: 1px !important;
-    padding: 0 !important;
-    margin: -1px !important;
-    overflow: hidden !important;
-    font-size: 0 !important;
+  position: absolute;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  font-size: 0 !important;
 
-	// clip: rect(0,0,0,0) !important;
-	// white-space: nowrap !important;
-	// border: 0 !important;
+  // clip: rect(0,0,0,0) !important;
+  // white-space: nowrap !important;
+  // border: 0 !important;
 }
 
 h1 {
-    font-size: 40px;
-    font-weight: 900;
-    margin: 10px;
+  font-size: 40px;
+  font-weight: 900;
+  margin: 10px;
 }
 
 h2 {
-    font-size: 25px;
-    font-weight: 900;
-    
-    border-bottom: 2px solid black;
+  font-size: 25px;
+  font-weight: 900;
+
+  border-bottom: 2px solid black;
 }
 
 button.icon {
-    width: 25px;
-    height: 25px;
-    border-radius: 3px;
+  width: 25px;
+  height: 25px;
+  border-radius: 3px;
 }
 
 .display-none {
-    display: none;
+  display: none;
 }
